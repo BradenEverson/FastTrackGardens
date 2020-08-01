@@ -43,7 +43,6 @@ namespace Agronomous
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                plant
             }
             else
             {

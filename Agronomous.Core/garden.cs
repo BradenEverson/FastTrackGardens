@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Agronomous.Core
 {
-    class garden
+    public class garden
     {
+        public Guid gardenGuid { get; set; }
+        public string gardenName { get; set; }
     }
 }
