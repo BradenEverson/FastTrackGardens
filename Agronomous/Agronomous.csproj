@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Agronomous.Core\Agronomous.Core.csproj" />
+    <ProjectReference Include="..\Agronomous.Data\Agronomous.Database.csproj" />
   </ItemGroup>
 
 </Project>

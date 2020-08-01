@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Agronomous.Data
+namespace Agronomous.Database
 {
     public class InMemoryPlantDb : IPlantData
     {

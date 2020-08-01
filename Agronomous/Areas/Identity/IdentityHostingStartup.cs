@@ -19,9 +19,6 @@ namespace Agronomous.Areas.Identity
                 services.AddDbContext<AgronomousContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AgronomousContextConnection")));
-
-                services.AddDefaultIdentity<user>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<AgronomousContext>();
             });
         }
     }
