@@ -12,6 +12,7 @@ using Agronomous.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Agronomous.Core;
 
 namespace Agronomous
 {
@@ -30,7 +31,7 @@ namespace Agronomous
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<user>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
         }
@@ -42,6 +43,7 @@ namespace Agronomous
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                plant
             }
             else
             {

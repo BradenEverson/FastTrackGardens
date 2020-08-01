@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-Agronomous-DD1F136F-3C7C-4AD3-98A8-8FE1870728A0</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200801180646_UserExtend.cs" />
+    <Compile Remove="Data\Migrations\20200801180646_UserExtend.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200801180808_UserExtend.cs" />
+    <Compile Remove="Data\Migrations\20200801180808_UserExtend.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />

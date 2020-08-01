@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Agronomous.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<user>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
