@@ -52,6 +52,6 @@ namespace Agronomous.Core
         public soilType soilType { get; set; }
         public ph ph { get; set; }
         public bloomTime bloomTime { get; set; }
-        public garden parentGarden { get; set; }
+        public Guid gardenGuid { get; set; }
     }
 }
