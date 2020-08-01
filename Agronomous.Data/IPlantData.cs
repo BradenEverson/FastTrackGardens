@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Agronomous.Data
+namespace Agronomous.Database
 {
     public interface IPlantData
     {

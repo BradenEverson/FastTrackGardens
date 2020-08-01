@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Agronomous.Core;
+using Agronomous.Database;
 
 namespace Agronomous
 {
@@ -34,6 +35,7 @@ namespace Agronomous
             services.AddDefaultIdentity<user>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+            services.AddSingleton<IPlantData, InMemoryPlantDb>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
