@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -38,12 +39,20 @@ namespace Agronomous
             var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Hash);
             return (claim != null) ? claim.Value : string.Empty;
         }
-        public static Guid editGardenGuid(this IIdentity identity)
+        public static Guid editGardenGuid(this IPrincipal currentPrincipal)
         {
-            var user = ((ClaimsIdentity)identity);
             Guid gardenGuid = Guid.NewGuid();
-            user.RemoveClaim(user.FindFirst(ClaimTypes.Hash));
-            user.AddClaim(new Claim(ClaimTypes.Hash, gardenGuid.ToString()));
+            var identity = currentPrincipal.Identity as ClaimsIdentity;
+            if (identity == null)
+            {
+                return new Guid();
+            }
+            var existingClaim = identity.FindFirst(ClaimTypes.Hash);
+            if (existingClaim != null)
+            {
+                identity.RemoveClaim(existingClaim);
+            }
+            identity.AddClaim(new Claim(ClaimTypes.Hash, gardenGuid.ToString()));
             return gardenGuid;
         }
     }
