@@ -1,7 +1,23 @@
 ﻿@page
+@inject SignInManager<user> SignInManager
+@inject UserManager<user> UserManager
 @model Agronomous.gardenModel
 @{
     ViewData["Title"] = "garden";
 }
 <h1>Your garden</h1>
-
+<br />
+@if (SignInManager.IsSignedIn(User) && !String.IsNullOrEmpty(User.Identity.GardenGuid())) 
+{
+    
+}
+else if(SignInManager.IsSignedIn(User))
+{
+    <form method="post">
+        <button class="btn btn-outline-success" type="submit">Create A Garden</button>
+    </form>
+}
+else
+{
+    <p>You shouldn't be here</p>
+}

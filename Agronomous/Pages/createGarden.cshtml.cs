@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Agronomous
 {
-    public class gardenModel : PageModel
+    public class createGardenModel : PageModel
     {
-        public IActionResult OnPost()
+        public void OnGet()
         {
-            return Redirect("/createGarden");
+
         }
     }
 }
