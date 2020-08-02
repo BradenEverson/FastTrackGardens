@@ -5,4 +5,25 @@
 }
 
 <h1>Create Your Garden</h1>
-
+<form method="post">
+    <div id="searchbar" class="input-group">
+        <input type="search" placeholder="Search your plant" asp-for="searchTerm"/>
+        <button type="submit" class="btn input-group-sm btn-light" id="search">Search</button>
+    </div>
+    @if(Model.searchedPlant != null)
+    {
+        <br />
+        <div class="card border-success mb-3" style="width: 24rem">
+            <div class="card-body">
+                <h5 class="card-title">@Model.searchTerm</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Model.searchedPlant.botanicalName</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@Model.searchedPlant.PlantType</li>
+                    <li class="list-group-item">Blooms in @Model.searchedPlant.BloomTime.ToLowerInvariant()</li>
+                    <li class="list-group-item">Soil ph should be @Model.searchedPlant.SoilPh</li>
+                </ul>
+            </div>
+            <button class="btn btn-outline-success" style="width:10rem; margin-left:auto; margin-bottom: auto;" id="AddToGarden">Add</button>
+        </div>
+    }
+</form>

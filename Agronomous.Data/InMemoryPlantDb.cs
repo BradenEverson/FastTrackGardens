@@ -21,7 +21,7 @@ namespace Agronomous.Database
 
         public List<plant> aggregateGarden(Guid gardenGuid)
         {
-            List<plant> garden = plantMemory.Where(r => r.gardenGuid == gardenGuid).Cast<plant>().ToList();
+            List<plant> garden = plantMemory.Where(r => Guid.Parse(r.gardenGuid) == gardenGuid).Cast<plant>().ToList();
             return (garden != null) ? garden : null;
         }
 
@@ -58,9 +58,8 @@ namespace Agronomous.Database
             var plant = plantMemory.FirstOrDefault(r => r.id == updatedPlant.id);
             if(plant != null)
             {
-                plant.soilType = updatedPlant.soilType;
-                plant.sunExposure = updatedPlant.sunExposure;
-                plant.ph = updatedPlant.ph;
+                plant.SoilPh = updatedPlant.SoilPh;
+                plant.gardenGuid = updatedPlant.gardenGuid;
             }
             return plant;
         }
