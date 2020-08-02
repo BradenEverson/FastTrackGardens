@@ -7,11 +7,17 @@
 }
 <h1>Your garden</h1>
 <br />
-@if (SignInManager.IsSignedIn(User) && true/* User.Identity.GardenGuid().Length > 0*/) 
+@if (SignInManager.IsSignedIn(User) && Model.userGarden.Count > 0)
 {
-    
+    foreach (var plant in Model.userGarden)
+    {
+        <p>@plant.name</p>
+    }
+    <form method="post">
+        <button class="btn btn-outline-dark" type="submit">Edit Your Garden</button>
+    </form>
 }
-else if(SignInManager.IsSignedIn(User))
+else if (SignInManager.IsSignedIn(User))
 {
     <form method="post">
         <button class="btn btn-outline-success" type="submit">Create A Garden</button>
