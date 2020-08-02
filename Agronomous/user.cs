@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Agronomous.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -12,34 +15,39 @@ namespace Agronomous
 {
     public class user : IdentityUser
     {
-        public Guid plantGuid { get; set; }
+        public string plantGuid { get; set; }
     }
     public class PlantClaimsPrincipalFactory : UserClaimsPrincipalFactory<user, IdentityRole>
     {
         public PlantClaimsPrincipalFactory(
-            UserManager<user> userManager,
+            UserManager<user> _userManager,
             RoleManager<IdentityRole> roleManager,
             IOptions<IdentityOptions> optionsAccessor
-            ) : base(userManager,roleManager,optionsAccessor)
-        { }
+            ) : base(_userManager,roleManager,optionsAccessor)
+        {
+        }
         public async override Task<ClaimsPrincipal> CreateAsync(user user)
         {
             var principal = await base.CreateAsync(user);
             if (!(user.plantGuid.Equals(null)))
             {
-                ((ClaimsIdentity)principal.Identity).AddClaim(new Claim(ClaimTypes.Hash, user.plantGuid.ToString()));
+                ((ClaimsIdentity)principal.Identity).AddClaim(new Claim(ClaimTypes.Hash, user.plantGuid));
             }
+            Console.WriteLine("Done");
             return principal;
         }
+        
     }
     public static class IdentityExtensions
     {
+
         public static string GardenGuid(this IIdentity identity)
         {
-            var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Hash);
-            return (claim != null) ? claim.Value : string.Empty;
+            var claim = ((ClaimsIdentity)identity).FindFirst("plantGuid");//((ClaimsIdentity)identity).FindFirst(ClaimTypes.Hash);
+            //return (claim != null) ? claim.Value : string.Empty;
+            return claim.Value;
         }
-        public static Guid editGardenGuid(this IPrincipal currentPrincipal)
+        public static Guid editGardenGuid(this IPrincipal currentPrincipal, AgronomousContext db)
         {
             Guid gardenGuid = Guid.NewGuid();
             var identity = currentPrincipal.Identity as ClaimsIdentity;
@@ -53,6 +61,7 @@ namespace Agronomous
                 identity.RemoveClaim(existingClaim);
             }
             identity.AddClaim(new Claim(ClaimTypes.Hash, gardenGuid.ToString()));
+
             return gardenGuid;
         }
     }

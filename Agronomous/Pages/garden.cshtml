@@ -7,7 +7,7 @@
 }
 <h1>Your garden</h1>
 <br />
-@if (SignInManager.IsSignedIn(User) && !String.IsNullOrEmpty(User.Identity.GardenGuid())) 
+@if (SignInManager.IsSignedIn(User) && true/* User.Identity.GardenGuid().Length > 0*/) 
 {
     
 }

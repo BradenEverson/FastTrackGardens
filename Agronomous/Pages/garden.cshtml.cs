@@ -9,6 +9,9 @@ namespace Agronomous
 {
     public class gardenModel : PageModel
     {
+        public void OnGet()
+        {
+        }
         public IActionResult OnPost()
         {
             return Redirect("/createGarden");
