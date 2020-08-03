@@ -30,7 +30,7 @@ namespace Agronomous.Database
             return 0;
         }
 
-        public plant delete(int id)
+        public plant delete(Guid id)
         {
             var deletedPlant = plantMemory.FirstOrDefault(r => r.id == id);
             if(deletedPlant != null)
@@ -40,7 +40,7 @@ namespace Agronomous.Database
             return deletedPlant;
         }
 
-        public plant getById(int id)
+        public plant getById(Guid id)
         {
             var plant = plantMemory.FirstOrDefault(r => r.id == id);
             if(plant != null)
@@ -58,8 +58,8 @@ namespace Agronomous.Database
             var plant = plantMemory.FirstOrDefault(r => r.id == updatedPlant.id);
             if(plant != null)
             {
-                plant.SoilPh = updatedPlant.SoilPh;
                 plant.gardenGuid = updatedPlant.gardenGuid;
+                plant.hardwareGuid = updatedPlant.hardwareGuid;
             }
             return plant;
         }

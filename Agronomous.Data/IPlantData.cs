@@ -8,9 +8,9 @@ namespace Agronomous.Database
     public interface IPlantData
     {
         public plant add(plant plant);
-        public plant delete(int id);
+        public plant delete(Guid id);
         public plant update(plant updatedPlant);
-        public plant getById(int id);
+        public plant getById(Guid id);
         public int commit();
         public List<plant> aggregateGarden(Guid gardenGuid);
     }

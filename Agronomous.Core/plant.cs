@@ -6,7 +6,12 @@ namespace Agronomous.Core
 {
     public class plant
     {
-        public int id { get; set; }
+        public plant()
+        {
+            id = Guid.NewGuid();
+        }
+        public Guid id { get; }
+        public string hardwareGuid { get; set; }
         public string botanicalName { get; set; }
         public string PlantType { get; set; }
         public string SunExposure { get; set; }
@@ -16,5 +21,6 @@ namespace Agronomous.Core
         public string FlowerColor { get; set; }
         public string HardinessZones { get; set; }
         public string gardenGuid { get; set; }
+        public string NormalName { get; set; }
     }
 }
