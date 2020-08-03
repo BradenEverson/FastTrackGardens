@@ -9,9 +9,31 @@
 <br />
 @if (SignInManager.IsSignedIn(User) && Model.userGarden.Count > 0)
 {
-    foreach (var plant in Model.userGarden)
+    @for (int i = 0; i <= Model.userGarden.Count(); i += 3)
     {
-        <p>@plant.botanicalName</p>
+<div class="card-group">
+    @for (int f = 0; f < 3; f++)
+    {
+        @if(!(i + f >= Model.userGarden.Count()))
+        {
+        <div class="card border-success mb-3" style="width: 24rem">
+            <div class="card-body">
+                <h5 class="card-title">@Model.userGarden[i + f].NormalName</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Model.userGarden[i + f].botanicalName</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@Model.userGarden[i + f].PlantType</li>
+                    <li class="list-group-item">Blooms in @Model.userGarden[i + f].BloomTime.ToLowerInvariant()</li>
+                    <li class="list-group-item">Soil ph should be @Model.userGarden[i + f].SoilPh</li>
+                </ul>
+            </div>
+        </div>
+        }
+        else
+        {
+            break;
+        }
+    }
+</div>
     }
     <form method="post">
         <button class="btn btn-outline-dark" type="submit">Edit Your Garden</button>

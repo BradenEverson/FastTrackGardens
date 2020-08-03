@@ -16,5 +16,6 @@ namespace Agronomous.Core
         public string FlowerColor { get; set; }
         public string HardinessZones { get; set; }
         public string gardenGuid { get; set; }
+        public string NormalName { get; set; }
     }
 }
