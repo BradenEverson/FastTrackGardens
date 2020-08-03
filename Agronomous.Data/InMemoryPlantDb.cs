@@ -43,14 +43,7 @@ namespace Agronomous.Database
         public plant getById(Guid id)
         {
             var plant = plantMemory.FirstOrDefault(r => r.id == id);
-            if(plant != null)
-            {
-                return plant;
-            }
-            else
-            {
-                return null;
-            }
+            return plant;
         }
 
         public plant update(plant updatedPlant)
@@ -62,6 +55,11 @@ namespace Agronomous.Database
                 plant.hardwareGuid = updatedPlant.hardwareGuid;
             }
             return plant;
+        }
+        public plant getByHardwareId(string hardwareId)
+        {
+            plant hardwareIdPlant = plantMemory.FirstOrDefault(r => r.hardwareGuid == hardwareId);
+            return hardwareIdPlant;
         }
     }
 }

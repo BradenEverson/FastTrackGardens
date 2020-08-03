@@ -28,7 +28,7 @@
                             <li class="list-group-item">Blooms in @Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].BloomTime.ToLowerInvariant()</li>
                             <li class="list-group-item">Soil ph should be @Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].SoilPh</li>
                         </ul>
-                        <button asp-page="addDevice" class="btn btn-outline-success">Add A Smart Device</button>  
+                        <a class="btn btn-outline-success" asp-page="./addDevice" asp-route-plantId="@Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].id">Add A Smart Device</a>  
                     </div>
                 </div>
             }

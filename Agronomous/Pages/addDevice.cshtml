@@ -1,8 +1,32 @@
-﻿@page
+﻿@page "{plantId:Guid}"
 @model Agronomous.addDeviceModel
 @{
     ViewData["Title"] = "addDevice";
 }
 
-<h1>addDevice</h1>
+<h1 style="text-align:center">Add A Device To Automate your plant's care</h1>
+@if(Model.userPlant.hardwareGuid == Model.modelNumber)
+{
+    <div class="alert alert-success">
+        <h4 class="alert-heading">Success!</h4>
+        <p>
+            Successfully added hardware id!
+        </p>
+    </div> 
+}
+@if (Model.userPlant != null)
+{
+    <h2 style="margin-top:5%">Enter the device model ID for your @Model.userPlant.NormalName.ToLowerInvariant() in the box below:</h2>
+
+    <form method="get">
+        <div id="searchbar" class="input-group">
+            <input type="search" placeholder="Search your plant" asp-for="modelNumber" style="width:75%; margin-top:3%;" />
+            <button type="submit" class="btn input-group-sm btn-light" id="search" style="margin-top:3%">Add</button>
+        </div>
+    </form>
+}
+else
+{
+    <h1>Plant is null or plant is not yours</h1>
+}
 

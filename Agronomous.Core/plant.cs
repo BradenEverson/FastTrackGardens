@@ -9,6 +9,7 @@ namespace Agronomous.Core
         public plant()
         {
             id = Guid.NewGuid();
+            hardwareGuid = "none";
         }
         public Guid id { get; }
         public string hardwareGuid { get; set; }
