@@ -18,9 +18,8 @@ namespace Agronomous
         [BindProperty]
         public string searchTerm { get; set; }
         public plant searchedPlant;
-        public readonly ApplicationDbContext db;
-        public readonly IPlantData plants;
-        public user currentUser = new user();
+        private readonly ApplicationDbContext db;
+        private readonly IPlantData plants;
         public createGardenModel(ApplicationDbContext db, IPlantData plants)
         {
             this.db = db;
@@ -28,12 +27,10 @@ namespace Agronomous
         }
         public void OnGet()
         {
-            currentUser = this.db.Users.FirstOrDefault(r => r.UserName == User.Identity.Name);
-            Console.WriteLine(currentUser.plantGuid);
+            Console.WriteLine(db.Users.FirstOrDefault(r => r.UserName == User.Identity.Name).plantGuid);
         }
         public void OnPost()
         {
-
             plant plant = new plant();
             HtmlDocument htmlDocument = scrape("https://www.almanac.com/search/site/growing%2520" + searchTerm);
             List<HtmlNode> searchTerms = htmlDocument.DocumentNode.Descendants("a").Where(r => r.GetAttributeValue("href", "").Contains("https://www.almanac.com/plant")).ToList();
@@ -41,7 +38,6 @@ namespace Agronomous
             HtmlDocument htmlResult = scrape(plantUrl);
             List<HtmlNode> plantTable = htmlResult.DocumentNode.Descendants("table").Where(r => r.GetAttributeValue("class", "").Contains("views-table")).ToList();
             List<string> plantDataPairs = plantTable[0].InnerText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(r => !string.IsNullOrWhiteSpace(r)).Cast<string>().ToList();
-            plant.NormalName = searchTerm;
             plant.botanicalName = plantDataPairs[1];
             plant.PlantType = plantDataPairs[3];
             plant.SunExposure = plantDataPairs[5];
@@ -49,9 +45,8 @@ namespace Agronomous
             plant.SoilPh = plantDataPairs[9];
             plant.BloomTime = plantDataPairs[11];
             plant.FlowerColor = plantDataPairs[13];
-            plant.gardenGuid = db.Users.FirstOrDefault(r => r.UserName == User.Identity.Name).plantGuid;
+            plant.HardinessZones = plantDataPairs[15];
             searchedPlant = plant;
-            plants.add(searchedPlant);
         }
 
         private HtmlDocument scrape(string term)

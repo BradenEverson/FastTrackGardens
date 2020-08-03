@@ -7,34 +7,27 @@
 <h1>Create Your Garden</h1>
 <form method="post">
     <div id="searchbar" class="input-group">
-        <input type="search" placeholder="Search your plant" asp-for="searchTerm" />
-        <button type="submit" class="btn input-group-sm btn-light" id="search">Find And Add</button>
+        <input type="search" placeholder="Search your plant" asp-for="searchTerm"/>
+        <button type="submit" class="btn input-group-sm btn-light" id="search">Search</button>
     </div>
+    @if(Model.searchedPlant != null)
+    {
+        <br />
+        <div class="card border-success mb-3" style="width: 24rem">
+            <div class="card-body">
+                <h5 class="card-title">@Model.searchTerm</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Model.searchedPlant.botanicalName</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@Model.searchedPlant.PlantType</li>
+                    <li class="list-group-item">Blooms in @Model.searchedPlant.BloomTime.ToLowerInvariant()</li>
+                    <li class="list-group-item">Soil ph should be @Model.searchedPlant.SoilPh</li>
+                </ul>
+            </div>
+            <button class="btn btn-outline-success" style="width:10rem; margin-left:auto; margin-bottom: auto;" id="AddToGarden">Add</button>
+        </div>
+    }
 </form>
-<br />
-@for (int i = 0; i <= Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid)).Count(); i += 3)
-{
-    <div class="card-group">
-        @for (int f = 0; f < 3; f++)
-        {
-            @if (!(i + f >= Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid)).Count()))
-            {
-                <div class="card border-success mb-3" style="width: 24rem">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].NormalName</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].botanicalName</h6>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">@Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].PlantType</li>
-                            <li class="list-group-item">Blooms in @Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].BloomTime.ToLowerInvariant()</li>
-                            <li class="list-group-item">Soil ph should be @Model.plants.aggregateGarden(Guid.Parse(Model.db.Users.FirstOrDefault(r => r.UserName == Model.User.Identity.Name).plantGuid))[i + f].SoilPh</li>
-                        </ul>
-                    </div>
-                </div>
-            }
-            else
-            {
-                break;
-            }
-        }
-    </div>
-}
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script>
+
+</script>
