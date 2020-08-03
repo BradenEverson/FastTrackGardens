@@ -12,6 +12,7 @@ namespace Agronomous.Database
         public plant update(plant updatedPlant);
         public plant getById(Guid id);
         public int commit();
+        public plant getByHardwareId(string hardwareId);
         public List<plant> aggregateGarden(Guid gardenGuid);
     }
 }

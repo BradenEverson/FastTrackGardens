@@ -22,9 +22,6 @@ namespace Agronomous
         public IActionResult OnGet(Guid PlantId)
         {
             userPlant = plants.getById(PlantId);
-            Console.WriteLine(PlantId);
-            Console.WriteLine(plants.getById(PlantId).id);
-            Console.WriteLine(userPlant.id);
             if(userPlant == null)
             {
                 return Redirect("./error");
@@ -32,8 +29,9 @@ namespace Agronomous
             if (!string.IsNullOrEmpty(modelNumber))
             {
                 userPlant.hardwareGuid = modelNumber;
-                Console.WriteLine("Hardware id: " + userPlant.hardwareGuid);
-                plants.update(userPlant);
+                Console.WriteLine("Hardware id: " + userPlant.hardwareGuid);;
+                Console.WriteLine(plants.update(userPlant).hardwareGuid);
+                Console.WriteLine(plants.getByHardwareId(modelNumber).hardwareGuid);
             }
             return Page();
         }

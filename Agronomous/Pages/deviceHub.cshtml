@@ -1,8 +1,14 @@
-﻿@page
+﻿@page "{hardwareGuid}"
 @model Agronomous.deviceHubModel
 @{
     ViewData["Title"] = "deviceHub";
+    Layout = null;
 }
-
-<h1>deviceHub</h1>
+@if(Model.hardwarePlant != null)
+{
+<p>@Model.hardwarePlant.NormalName </p>
+<p>@Model.hardwarePlant.SoilType</p>
+<p>@Model.hardwarePlant.SoilPh</p>
+<p>@Model.hardwarePlant.SunExposure</p>
+}
 
